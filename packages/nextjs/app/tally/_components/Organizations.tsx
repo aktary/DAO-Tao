@@ -1,11 +1,16 @@
 import { Organization } from "../../../autogen/schema";
 import { useOrganizationsQuery } from "../../../hooks/generated";
 
-export const Organizations = () => {
+interface OrganizationsProps {
+  chainId?: number;
+}
+
+export const Organizations = ({ chainId }: OrganizationsProps) => {
+  console.log("Received chainId:", chainId);
   const { data, isLoading } = useOrganizationsQuery({
     input: {
       filters: {
-        chainId: `eip155:1`,
+        chainId: chainId,
       },
     },
     pagination: { limit: 8, offset: 0 },
